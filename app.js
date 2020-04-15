@@ -28,7 +28,9 @@ let query = "";
 
 app.post('/sent', (req, res) => {
   query = JSON.stringify(req.body);
-  runSample();
+  runSample().then(data => {
+    res.send({Reply: data})
+  });
 })
 
 
@@ -52,15 +54,10 @@ async function runSample(projectId = 'crow-ppcmcc') {
     };
   
     const responses = await sessionClient.detectIntent(request);
-    //console.log('Detected intent\n');
     const result = responses[0].queryResult;
-  //  console.log(`  Query: ${result.queryText}`);
     console.log(`${result.fulfillmentText}`);
-    // if (result.intent) {
-    //   console.log(`  Intent: ${result.intent.displayName}`);
-    // } else {
-    //   console.log(`  No intent matched.`);
-    // }
+
+    return result.fulfillmentText;
   }
 
 app.listen(port, () => {
