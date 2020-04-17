@@ -1,6 +1,7 @@
 const dialogflow = require('dialogflow');
 const uuid = require('uuid');
 const express = require('express');
+const chalk = require('chalk');
 const app = express();
 const bodyParser = require('body-parser');
 const port = 5000;
@@ -33,7 +34,6 @@ app.post('/sent', (req, res) => {
   });
 })
 
-
 async function runSample(projectId = 'crow-ppcmcc') {
   const sessionId = uuid.v4();
   console.log("API accessed");
@@ -55,7 +55,7 @@ async function runSample(projectId = 'crow-ppcmcc') {
   
     const responses = await sessionClient.detectIntent(request);
     const result = responses[0].queryResult;
-    console.log(`${result.fulfillmentText}`);
+    console.log(chalk.blue(`${result.fulfillmentText}`));
 
     return result.fulfillmentText;
   }
