@@ -1,8 +1,7 @@
 const express = require('express');
-const chalk = require('chalk');
 const app = express();
 const bodyParser = require('body-parser');
-const dialog = require('./dialog')
+const dialog = require('./utils/dialog')
 const port = 5000;
 
 app.use(bodyParser.json());
@@ -15,7 +14,6 @@ app.get('/', (req, res) => {
 })
 
 app.use(function (req, res, next) {
-
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
@@ -23,11 +21,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-
-let query = "";
-
 app.post('/sent', (req, res) => {
-  query = JSON.stringify(req.body);
+  let query = JSON.stringify(req.body);
   dialog.changeQuery(query);
 })
 

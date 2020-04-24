@@ -31,8 +31,6 @@ async function runSample(projectId = 'crow-ppcmcc') {
       const responses = await sessionClient.detectIntent(request);
       const result = responses[0].queryResult;
       console.log(chalk.blue(`${result.fulfillmentText}`));
-  
-      //return result.fulfillmentText;
     }
 
 module.exports = {
