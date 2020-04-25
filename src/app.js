@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const dialog = require('./utils/dialog')
+const dialog = require('../utils/dialog')
 const port = 5000;
 
 app.use(bodyParser.json());
