@@ -3,7 +3,6 @@ const uuid = require('uuid')
 const chalk = require('chalk')
 
 let query = ""
-let result = ""
 
 const changeQuery = (tempString) => {
     query = tempString
@@ -31,7 +30,6 @@ async function runSample(projectId = 'crow-ppcmcc') {
       const responses = await sessionClient.detectIntent(request)
       const result = responses[0].queryResult
       console.log(chalk.blue(`${result.fulfillmentText}`));
-      //let result = `${result.fulfillmentText}`
     }
 
 module.exports = {

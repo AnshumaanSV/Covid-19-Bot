@@ -3,7 +3,6 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const dialog = require('../utils/dialog')
-const port = 5000
 const publicDir = path.join(__dirname, '/public')
 
 app.use(express.static(publicDir))
@@ -25,6 +24,6 @@ app.post('/sent', (req, res) => {
   dialog.changeQuery(query)
 })
 
-app.listen(port, () => {
+app.listen(5000, () => {
   console.log('Server running')
 });

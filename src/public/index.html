@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Covid-19 chat bot by Anshumaan Sahu</title>
+        <title>Covid-19 chat bot</title>
         <link rel="stylesheet" href="style.css">
     </head>
 
@@ -37,15 +37,14 @@
                 }
 
                 fetch(endpoint, {
-                method: "post",
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
+                    method: "post",
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json'
                 }
             }).then(res => res.json())
             .then(res2 => console.log(res2));
             }
         </script>
-
     </body>
 </html>
