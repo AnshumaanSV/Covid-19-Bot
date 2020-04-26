@@ -1,24 +1,24 @@
-const dialogflow = require('dialogflow');
-const uuid = require('uuid');
-const chalk = require('chalk');
+const dialogflow = require('dialogflow')
+const uuid = require('uuid')
+const chalk = require('chalk')
 
-let query = "";
+let query = ""
+let result = ""
 
 const changeQuery = (tempString) => {
-    query = tempString;
-    runSample();
+    query = tempString
+    runSample()
 }
 
 async function runSample(projectId = 'crow-ppcmcc') {
-    const sessionId = uuid.v4();
-    console.log(chalk.bgGreen('API accessed'));
-      const sessionClient = new dialogflow.SessionsClient( {
-          keyFilename:"/home/srt/Documents/Covid-19 Bot/Crow-c6d35003877c.json"
-        }
-      );
-      const sessionPath = sessionClient.sessionPath(projectId, sessionId);
+    const sessionId = uuid.v4()
+    console.log(chalk.bgGreen('API accessed'))
+    const sessionClient = new dialogflow.SessionsClient( {
+        keyFilename:"/home/srt/Documents/Covid-19 Bot/Crow-c6d35003877c.json"
+    });
+    const sessionPath = sessionClient.sessionPath(projectId, sessionId)
     
-      const request = {
+    const request = {
         session: sessionPath,
         queryInput: {
           text: {
@@ -26,11 +26,12 @@ async function runSample(projectId = 'crow-ppcmcc') {
             languageCode: 'en-US',
           },
         },
-      };
+      }
     
-      const responses = await sessionClient.detectIntent(request);
-      const result = responses[0].queryResult;
+      const responses = await sessionClient.detectIntent(request)
+      const result = responses[0].queryResult
       console.log(chalk.blue(`${result.fulfillmentText}`));
+      //let result = `${result.fulfillmentText}`
     }
 
 module.exports = {
