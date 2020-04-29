@@ -24,6 +24,10 @@ app.post('/sent', (req, res) => {
   dialog.changeQuery(query)
 })
 
+app.get('*', (req, res) => {
+  res.send('Error 404')
+})
+
 app.listen(5000, () => {
   console.log('Server running')
 });

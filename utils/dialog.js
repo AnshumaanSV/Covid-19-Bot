@@ -1,6 +1,7 @@
 const dialogflow = require('dialogflow')
 const uuid = require('uuid')
 const chalk = require('chalk')
+const path = require('path')
 
 let query = ""
 
@@ -13,7 +14,7 @@ async function runSample(projectId = 'crow-ppcmcc') {
     const sessionId = uuid.v4()
     console.log(chalk.bgGreen('API accessed'))
     const sessionClient = new dialogflow.SessionsClient( {
-        keyFilename:"/home/srt/Documents/Covid-19 Bot/Crow-c6d35003877c.json"
+        keyFilename:path.join(__dirname, '../') + "Crow-c6d35003877c.json"
     });
     const sessionPath = sessionClient.sessionPath(projectId, sessionId)
     
