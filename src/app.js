@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const hbs = require('hbs')
 const dialog = require('../src/utils/dialog')
+const port = process.env.PORT || 5000
 
 const publicDir = path.join(__dirname, '../public')
 const viewsDir = path.join(__dirname, '../templates')
@@ -21,4 +22,6 @@ app.get('/comm', (req, res) => {
     })
 })
 
-app.listen(5000)
+app.listen(port, () => {
+    console.log('Server running')
+})
