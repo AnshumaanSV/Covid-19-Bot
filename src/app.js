@@ -1,35 +1,24 @@
 const path = require('path')
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser')
-const publicDir = path.join(__dirname, '/public')
-const port = process.env.PORT || 5000
+const hbs = require('hbs')
+const dialog = require('../src/utils/dialog')
 
+const publicDir = path.join(__dirname, '../public')
+const viewsDir = path.join(__dirname, '../templates')
+
+app.set('view engine', 'hbs')
+app.set('views', viewsDir)
 app.use(express.static(publicDir))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({
-  extended: false
-}))
 
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
-  res.setHeader('Access-Control-Allow-Credentials', true)
-  next()
+app.get('', (req, res) => {
+    res.render('index')
 })
 
-app.post('/sent', (req, res) => {
-  let query = JSON.stringify(req.body)
-  const dialog = require('../utils/dialog')
-  dialog.changeQuery(query)
-  dialog
+app.get('/comm', (req, res) => {
+    dialog.runSample(req.query.userquery, ({message}) => {
+        res.send({message})
+    })
 })
 
-app.get('*', (req, res) => {
-  res.send('Error 404')
-})
-
-app.listen(port, () => {
-  console.log('Server running')
-});
+app.listen(5000)
