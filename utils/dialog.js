@@ -4,11 +4,16 @@ const chalk = require('chalk')
 const path = require('path')
 
 let query = ""
+let data = {
+  message: ''
+}
 
 const changeQuery = (tempString) => {
     query = tempString
     runSample()
 }
+
+const getResult = () => { return data}
 
 async function runSample(projectId = 'crow-ppcmcc') {
     const sessionId = uuid.v4()
@@ -31,8 +36,13 @@ async function runSample(projectId = 'crow-ppcmcc') {
       const responses = await sessionClient.detectIntent(request)
       const result = responses[0].queryResult
       console.log(chalk.blue(`${result.fulfillmentText}`));
+      
+      data.message = `${result.fulfillmentText}`
+
+      console.log(data.message)
     }
 
 module.exports = {
-    changeQuery: changeQuery
+    changeQuery: changeQuery,
+    getResult: getResult
 }
