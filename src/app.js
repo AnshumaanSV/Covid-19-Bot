@@ -22,6 +22,10 @@ app.get('/comm', (req, res) => {
     })
 })
 
+app.get('*', (req, res) => {
+    res.send('Error 404: Please don\'t mess around. Go back to home page')
+})
+
 app.listen(port, () => {
     console.log('Server running')
 })
