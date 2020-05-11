@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 const app = express()
 const hbs = require('hbs')
-const dialog = require('../src/utils/dialog')
+const homeRouter = require('./routes/home')
 const port = process.env.PORT || 5000
 
 const publicDir = path.join(__dirname, '../public')
@@ -11,20 +11,7 @@ const viewsDir = path.join(__dirname, '../templates')
 app.set('view engine', 'hbs')
 app.set('views', viewsDir)
 app.use(express.static(publicDir))
-
-app.get('', (req, res) => {
-    res.render('index')
-})
-
-app.get('/comm', (req, res) => {
-    dialog.runSample(req.query.userquery, ({message}) => {
-        res.send({message})
-    })
-})
-
-app.get('*', (req, res) => {
-    res.send('Error 404: Please don\'t mess around. Go back to home page')
-})
+app.use(homeRouter)
 
 app.listen(port, () => {
     console.log('Server running')
