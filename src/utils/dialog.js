@@ -2,7 +2,7 @@ const path = require('path')
 const dialogflow = require('dialogflow')
 const uuid = require('uuid')
 
-async function runSample(query, callback, projectId = 'crow-ppcmcc') {
+async function runSample(query, projectId = 'crow-ppcmcc') {
     const sessionId = uuid.v4()
     console.log('API accessed')
     const sessionClient = new dialogflow.SessionsClient( {
@@ -24,7 +24,7 @@ async function runSample(query, callback, projectId = 'crow-ppcmcc') {
       const result = responses[0].queryResult
       console.log(`${result.fulfillmentText}`);
 
-      callback({message: result.fulfillmentText})
+      return {message: result.fulfillmentText}
 }
 
 module.exports = {
