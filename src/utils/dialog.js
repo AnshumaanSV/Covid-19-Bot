@@ -4,7 +4,6 @@ const uuid = require('uuid')
 
 async function runSample(query, projectId = 'crow-ppcmcc') {
     const sessionId = uuid.v4()
-    console.log('API accessed')
     const sessionClient = new dialogflow.SessionsClient( {
         keyFilename:path.join(__dirname, '../../') + "Crow-c6d35003877c.json"
     });
@@ -22,7 +21,6 @@ async function runSample(query, projectId = 'crow-ppcmcc') {
     
       const responses = await sessionClient.detectIntent(request)
       const result = responses[0].queryResult
-      console.log(`${result.fulfillmentText}`);
 
       return {message: result.fulfillmentText}
 }
