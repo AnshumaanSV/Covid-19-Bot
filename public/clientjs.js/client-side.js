@@ -1,5 +1,3 @@
-console.log('Client side js loaded')
-
 const chatForm = document.querySelector('form')
 const search = document.querySelector('input')
 const resultArea = document.querySelector('#output')
